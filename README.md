@@ -22,7 +22,7 @@ daemon.
 It's best to install spotblock via packages tailored to your distribution. For
 example:
 
-* Arch Linux
+* [Arch Linux](https://aur.archlinux.org/packages/spotblock-git/)
 
 Otherwise you can use the following commands:
 
