@@ -1,0 +1,12 @@
+[Unit]
+Description=spotblock spotify ad blocker
+Requires=dbus.service pulseaudio.service
+After=dbus.service pulseaudio.service
+
+[Service]
+Type=dbus
+BusName=org.spotblock
+ExecStart=/usr/bin/spotblock
+
+[Install]
+WantedBy=default.target
