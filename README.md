@@ -68,7 +68,7 @@ use the dbus service provided by spotblock.
 spotblock is reachable under the `org.spotblock` name and provides the
 `/org/spotblock` object. This object in turn provides the `org.spotblock`
 interface which has the `Muted` property. This property is `true` if spotify is
-muted, `false` otherwise. spotify sends a signal whenever this property
+muted, `false` otherwise. spotblock sends a signal whenever this property
 changes.
 
 The following Ruby script listens to this signal and prints the status change:
