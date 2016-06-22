@@ -60,6 +60,24 @@ If you don't want to use spotblock as a systemd service you can also simply
 start it by running the spotblock binary. How to make the binary run on login
 depends on the distribution you're using.
 
+## Troubleshooting
+
+### spotblock mutes chromium
+
+spotblock mutes some spotify ads which run inside of chromium processes.
+Pulseaudio thinks that your chromium browser and those ads are the same kind of
+process and so it carries the "muted" property over to your browser. To fix this
+you have to give your real browser a "module-stream-restore.id" that is
+different from the one used by spotify. You can do this by writing a small
+wrapper script around chromium:
+
+```bash
+#!/bin/bash
+
+export PULSE_PROP="module-stream-restore.id=real-chromium"
+exec /usr/bin/chromium "$@"
+```
+
 ## Notifications
 
 If you want to be notified whenever spotblock mutes or unmutes spotify, you can
