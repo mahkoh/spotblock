@@ -4,8 +4,7 @@ Requires=dbus.service pulseaudio.service
 After=dbus.service pulseaudio.service
 
 [Service]
-Type=dbus
-BusName=org.spotblock
+Type=simple
 ExecStart=/usr/bin/spotblock
 
 [Install]
