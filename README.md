@@ -67,15 +67,15 @@ depends on the distribution you're using.
 spotblock mutes some spotify ads which run inside of chromium processes.
 Pulseaudio thinks that your chromium browser and those ads are the same kind of
 process and so it carries the "muted" property over to your browser. To fix this
-you have to give the spotify client a "module-stream-restore.id" that is
-different from the one used by chromium. You can do this by writing a small
-wrapper around spotify:
+you have to give your real browser a "module-stream-restore.id" that is
+different from the one used by spotify. You can do this by writing a small
+wrapper script around chromium:
 
 ```bash
 #!/bin/bash
 
-export PULSE_PROP="module-stream-restore.id=spotify"
-exec /usr/bin/spotify "$@"
+export PULSE_PROP="module-stream-restore.id=real-chromium"
+exec /usr/bin/chromium "$@"
 ```
 
 ## Notifications
