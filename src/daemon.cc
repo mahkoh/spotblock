@@ -168,8 +168,9 @@ void Daemon::handle_removed_stream(uint32_t idx) {
 
 void Daemon::handle_new_real_spotify_stream(const pa_sink_input_info *i) {
     this->spotify_streams.push_back(i->index);
-    if (this->spotify_muted && !i->mute) {
-        this->set_stream_muted(i->index, true);
+    if (this->spotify_muted != i->mute) {
+        this->set_stream_muted(i->index, this->spotify_muted);
+        this->emit_muted_change();
     }
 }
 
