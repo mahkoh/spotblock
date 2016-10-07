@@ -78,6 +78,46 @@ export PULSE_PROP="module-stream-restore.id=spotify"
 exec /usr/bin/spotify "$@"
 ```
 
+### Failed to start dbus.service: Unit dbus.service not found.
+
+spotblock depends on D-BUS as a systemd user service. This requires you to also run the D-BUS server as a systemd service. While this is the default in all newer versions of systemd and D-BUS, older version still run D-BUS through dbus-launch or other means when starting the Desktop environment (e.g. the version that Ubuntu 16.04 uses). 
+
+To run D-BUS as a systemd service you will need to create the following two files. A dbus socket `/etc/systemd/user/dbus.socket`:
+
+```
+[Unit]
+Description=D-Bus User Message Bus Socket
+
+[Socket]
+ListenStream=%t/bus
+
+[Install]
+WantedBy=sockets.target
+Also=dbus.service
+```
+
+... and the associated dbus service `/etc/systemd/user/dbus.service`:
+
+```
+[Unit]
+Description=D-Bus User Message Bus
+Documentation=man:dbus-daemon(1)
+Requires=dbus.socket
+
+[Service]
+ExecStart=/usr/bin/dbus-daemon --session --address=systemd: --nofork --nopidfile --systemd-activation
+ExecReload=/usr/bin/dbus-send --print-reply --session --type=method_call --dest=org.freedesktop.DBus / org.freedesktop.DBus.ReloadConfig
+
+[Install]
+Also=dbus.socket
+```
+
+All that is left to do after this is to enable the dbus service for all users:
+
+```
+systemctl --global enable dbus.socket
+```
+
 ## Notifications
 
 If you want to be notified whenever spotblock mutes or unmutes spotify, you can
