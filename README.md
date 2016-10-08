@@ -112,11 +112,20 @@ ExecReload=/usr/bin/dbus-send --print-reply --session --type=method_call --dest=
 Also=dbus.socket
 ```
 
+You will also be required to make sure that the environmental variable `DBUS_SESSION_BUS_ADDRESS` is set properly. You can check if it is set by running `echo $DBUS_SESSION_BUS_ADDRESS` in your shell. To use systemd to do this as well, write the following into `/etc/systemd/system/user@.service.d/dbus.conf`
+
+```
+[Service]
+Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/run/user/%I/bus
+```
+
 All that is left to do after this is to enable the dbus service for all users:
 
 ```
 systemctl --global enable dbus.socket
 ```
+
+To avoid having systemd and your desktop enviorment compete for how will get to start dbus will have to disable or remove your desktop environment's call of dbus-lauch. Depending on your `~/.xinitrc` or your systems `/etc/X11/xinit/xinitrc` this has to be done in diffrent ways. On Ubuntu 16.04 for example is enough to remove `use-session-dbus` from `/etc/X11/Xsession.options`.
 
 ## Notifications
 
