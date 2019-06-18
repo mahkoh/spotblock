@@ -166,7 +166,7 @@ void Daemon::handle_removed_stream(uint32_t idx) {
     }
 }
 
-void Daemon::handle_new_real_spotify_stream(const pa_sink_input_info *i) {
+void Daemon::handle_new_spotify_stream(const pa_sink_input_info *i) {
     this->spotify_streams.push_back(i->index);
     if (this->spotify_muted != i->mute) {
         this->set_stream_muted(i->index, this->spotify_muted);
@@ -182,20 +182,6 @@ void Daemon::set_spotify_muted(bool muted) {
 
 void Daemon::set_stream_muted(uint32_t idx, bool muted) {
     this->pa_ctx.set_sink_input_mute(idx, muted, nullptr, nullptr);
-}
-
-static bool is_real_spotify_stream(const char *c) {
-    return c && strcmp(c, "Spotify") == 0;
-}
-
-void Daemon::handle_new_spotify_stream(const pa_sink_input_info *i) {
-    if (!is_real_spotify_stream(i->name)) {
-        if (!i->mute) {
-            this->set_stream_muted(i->index, true);
-        }
-    } else {
-        this->handle_new_real_spotify_stream(i);
-    }
 }
 
 void Daemon::on_pa_sink_input_info(const pa_sink_input_info *i, int eol) {
