@@ -100,7 +100,7 @@ struct Daemon {
     void handle_ad_state_change(bool is_ad);
     void handle_message(dbus::Msg &m);
     void handle_new_spotify_stream(const pa_sink_input_info *i);
-    void handle_new_real_spotify_stream(const pa_sink_input_info *i);
+    /*void handle_new_real_spotify_stream(const pa_sink_input_info *i);*/
     void handle_new_stream(uint32_t idx);
     void handle_removed_stream(uint32_t idx);
     void handle_pa_io(uint32_t events, pa_io_event &e);
