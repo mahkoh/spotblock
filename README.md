@@ -14,8 +14,8 @@ spotblock depends on the following libraries:
 Note that, while libsystemd is a dependency, you can use spotblock even if
 you're not using systemd as your init system.
 
-spotblock only works if you're using pulseaudio and requires a running dbus
-daemon.
+spotblock only works if you're using pulseaudio or pipewire and requires a
+running dbus daemon.
 
 ### Building
 
