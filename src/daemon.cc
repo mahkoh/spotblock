@@ -197,7 +197,7 @@ void Daemon::on_pa_sink_input_info(const pa_sink_input_info *i, int eol) {
 }
 
 static bool trackid_is_ad(const char *c) {
-    const char *magic = "spotify:ad";
+    const char *magic = "/com/spotify/ad/";
     return strncmp(c, magic, strlen(magic)) == 0;
 }
 
