@@ -6,7 +6,7 @@ namespace pa_cb {
 pa_io_event *io_new(pa_mainloop_api *a, int fd, pa_io_event_flags_t events,
                     pa_io_event_cb_t cb, void *userdata)
 {
-    auto *daemon = (daemon::Daemon *)a->userdata;
+    auto *daemon = (sbdaemon::Daemon *)a->userdata;
     return daemon->on_pa_io_new(fd, events, cb, userdata);
 }
 
@@ -25,7 +25,7 @@ void io_set_destroy(pa_io_event *e, pa_io_event_destroy_cb_t cb) {
 pa_time_event *time_new(pa_mainloop_api *a, const struct timeval *tv,
                         pa_time_event_cb_t cb, void *userdata)
 {
-    auto *daemon = (daemon::Daemon *)a->userdata;
+    auto *daemon = (sbdaemon::Daemon *)a->userdata;
     return daemon->on_pa_time_new(tv, cb, userdata);
 }
 
@@ -42,7 +42,7 @@ void time_free(pa_time_event *e) {
 }
 
 pa_defer_event *defer_new(pa_mainloop_api *a, pa_defer_event_cb_t cb, void *userdata) {
-    auto *daemon = (daemon::Daemon *)a->userdata;
+    auto *daemon = (sbdaemon::Daemon *)a->userdata;
     return daemon->on_pa_defer_new(cb, userdata);
 }
 
@@ -59,20 +59,20 @@ void defer_free(pa_defer_event *e) {
 }
 
 void context_notify(pa_context *c, void *userdata) {
-    auto *daemon = (daemon::Daemon *)userdata;
+    auto *daemon = (sbdaemon::Daemon *)userdata;
     daemon->on_pa_context_notify();
 }
 
 void sink_input_info(pa_context *c, const pa_sink_input_info *i, int eol, void *userdata)
 {
-    auto *daemon = (daemon::Daemon *)userdata;
+    auto *daemon = (sbdaemon::Daemon *)userdata;
     daemon->on_pa_sink_input_info(i, eol);
 }
 
 void context_subscribe(pa_context *c, pa_subscription_event_type_t t, uint32_t idx,
                        void *userdata)
 {
-    auto *daemon = (daemon::Daemon *)userdata;
+    auto *daemon = (sbdaemon::Daemon *)userdata;
     daemon->on_pa_context_subscribe(t, idx);
 }
 

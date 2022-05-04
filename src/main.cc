@@ -4,7 +4,7 @@
 #include "daemon.h"
 
 static void run() {
-    auto daemon = new daemon::Daemon;
+    auto daemon = new sbdaemon::Daemon;
     daemon->init();
     daemon->loop();
 }

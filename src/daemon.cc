@@ -15,7 +15,7 @@
 
 #define container_of(ptr, type, member) ((type *)((char *)(ptr) - offsetof(type, member)))
 
-namespace daemon {
+namespace sbdaemon {
 
 pa_io_event *Daemon::on_pa_io_new(int fdn, pa_io_event_flags_t events,
                                   pa_io_event_cb_t cb, void *userdata)
@@ -256,7 +256,7 @@ void Daemon::handle_message(dbus::Msg &m) {
 static int spotify_properties_changed(sd_bus_message *m, void *userdata,
                                       sd_bus_error *ret_erro)
 {
-    auto *daemon = (daemon::Daemon *)userdata;
+    auto *daemon = (sbdaemon::Daemon *)userdata;
     daemon->on_spotify_properties_changed(m, ret_erro);
     return 0;
 }

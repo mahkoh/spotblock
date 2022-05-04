@@ -10,14 +10,14 @@
 #include "pa.h"
 #include "dbus.h"
 
-namespace daemon {
+namespace sbdaemon {
 
 struct Daemon;
 
 }
 
 struct pa_io_event {
-    daemon::Daemon *daemon;
+    sbdaemon::Daemon *daemon;
     pa_io_event_cb_t cb;
     pa_io_event_destroy_cb_t destroy_cb;
     void *userdata;
@@ -25,7 +25,7 @@ struct pa_io_event {
 };
 
 struct pa_time_event {
-    daemon::Daemon *daemon;
+    sbdaemon::Daemon *daemon;
     pa_time_event_cb_t cb;
     pa_time_event_destroy_cb_t destroy_cb;
     void *userdata;
@@ -34,7 +34,7 @@ struct pa_time_event {
 };
 
 struct pa_defer_event {
-    daemon::Daemon *daemon;
+    sbdaemon::Daemon *daemon;
     pa_defer_event_cb_t cb;
     pa_defer_event_destroy_cb_t destroy_cb;
     void *userdata;
@@ -42,7 +42,7 @@ struct pa_defer_event {
     bool freed;
 };
 
-namespace daemon {
+namespace sbdaemon {
 
 enum class FdType {
     PaIo,
