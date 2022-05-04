@@ -224,10 +224,12 @@ static void track_is_ad(dbus::Msg &m, bool *contains, bool *is) {
                     *is = trackid_is_ad(value);
                     return;
                 }
+                m.skip("v");
                 m.exit_container();
             }
             return;
         }
+        m.skip("v");
         m.exit_container();
     }
 }
