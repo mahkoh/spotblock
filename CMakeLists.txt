@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8.9)
+cmake_minimum_required(VERSION 3.10.0)
 project (spotblock)
 file(GLOB SOURCES "src/*.cc")
 add_executable(spotblock ${SOURCES})
